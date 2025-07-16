@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>From freakiest man on Earth😉</title>
+  <style>
+    body {
+      margin: 0;
+      background: #e5a5e2;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+
+    h1 {
+      color: #ff1493;
+      text-align: center;
+      margin-top: 200px;
+      font-size: 60px;
+      text-shadow: 2px 2px 8px #ff69b4;
+    }
+     .heart {
+      margin-top: -4cm;
+        font-size: 200px;
+      color: red;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+     button {
+      margin-top: 10px;
+      margin-right: 0cm;
+      padding: 15px 30px;
+      font-size: 100px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #ff1493;
+    }
+    p {
+      font-size: 50px;
+      color: #cc3366;
+    }
+    .content {
+      height: 3000px; /* 💡 This adds scrollable height */
+      text-align: center;
+      padding-top: 150px;
+      font-size: 24px;
+    }
+
+    canvas {
+      position: fixed; /* Keep confetti over the screen at all times */
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎉 Happy Birthday Mitchell 🎉</h1>
+
+  <div class="content"><div class="heart">💙</div>
+ <p> Para sa pinaka CUTEEE na dalaga👉🥺👈<p>
+ 
+ <audio id="birthday-audio">
+    <source src="b221e51b-b6f8-4d73-b8fd-05a4e4b8c71d.mp3"" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <button onclick="document.getElementById('birthday-audio').play()">
+    <img src="ea875e5f-6987-4db4-9419-a20c69c9b636.jpg" width="500" height-:300">
+
+  </button>
+ 
+  
+ <canvas id="confetti"></canvas>
+
+  <script>
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const confetti = [];
+
+    function random(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function createConfetti() {
+      for (let i = 0; i < 150; i++) {
+        confetti.push({
+          x: random(0, canvas.width),
+          y: random(-canvas.height, 0),
+          r: random(2, 6),
+          d: random(1, 5),
+          color: `hsl(${random(0, 360)}, 100%, 50%)`,
+          tilt: random(-10, 10)
+        });
+      }
+    }
+
+    function drawConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      confetti.forEach(c => {
+        ctx.beginPath();
+        ctx.fillStyle = c.color;
+        ctx.ellipse(c.x, c.y, c.r, c.r * 0.6, c.tilt, 0, Math.PI * 2);
+        ctx.fill();
+
+        c.y += c.d;
+        c.tilt += 0.05;
+
+        if (c.y > canvas.height) {
+          c.y = -5;
+          c.x = random(0, canvas.width);
+        }
+      });
+
+      requestAnimationFrame(drawConfetti);
+    }
+
+    createConfetti();
+    drawConfetti();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+
+</body>
+</html>
+
